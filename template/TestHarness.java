@@ -32,7 +32,7 @@ public class TestHarness {
 
 		//Create the phonebook handler
 		phonebookHander = new PhonebookHandler(phonebook);
-		
+
 		//TODO
 		//call 
 		List<Contact> sortedContacts = TEST_Sort(phonebookHander);
@@ -63,8 +63,8 @@ public class TestHarness {
 		System.out.println("\n -- Search results for " + name + " -- ");
 		List<PhonebookEntry> selectedEntries = phonebookHander.binarySearch(sortedContacts, name);
 		for (PhonebookEntry entry : selectedEntries) {
-			
-			System.out.println("Entries for " + name + " " +  entry.getType() + " " + entry.getPhoneNumber());
+
+			System.out.println("Entries for " + name + " " + entry.getType() + " " + entry.getPhoneNumber());
 		}
 	}
 	
