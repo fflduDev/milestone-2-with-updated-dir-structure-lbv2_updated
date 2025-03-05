@@ -1,5 +1,7 @@
 package template;
 
+import java.util.List;
+
 /**
  * model a Contact 
  * Contact has a name & list of phonebook entries
@@ -19,5 +21,10 @@ class Contact {
 
     public void addPhonebookEntry(String number, String type){
 
+    }
+
+    public List<PhonebookEntry> getPhonebookEntries() {
+        //TODO implement
+        return null;
     }
 }

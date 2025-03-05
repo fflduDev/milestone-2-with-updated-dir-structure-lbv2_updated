@@ -13,6 +13,10 @@ import java.util.*;
 
 public class PhonebookHandler implements iPhonebookHander{
 
+	public PhonebookHandler(Map<Contact, List<PhonebookEntry>> phonebook) {
+		//TODO fill constructor
+	}
+
 	@Override
 	public List<Contact> sortByName() {
 		// TODO Auto-generated method stub
