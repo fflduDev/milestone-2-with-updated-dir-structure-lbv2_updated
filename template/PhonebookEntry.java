@@ -8,18 +8,22 @@ package template;
  *   
  *   
  */
-
 class PhonebookEntry{
 
+    private String phoneNumber;
+    private String type; 
+
+    public PhonebookEntry(String phoneNumber, String type) {
+        this.phoneNumber = phoneNumber;
+        this.type = type; 
+    }
 
     public String getType() {
-        //TODO implement
-        return null;
+        return type;
     }
 
     public String getPhoneNumber() {
-        //TODO implement
-        return null;
+        return phoneNumber;
     }
 }
 	
