@@ -16,55 +16,55 @@ public class TestHarness {
 	public static void main(String[] args) throws InterruptedException {
 		init();
 		
-		//TODO: 2 cases:
-		//display non equality using your overriden equals method
-		//display equality using your overriden equals method
-
-		TEST_Equals(p1, p2);
-		TEST_Equals(p3, p3);
+		// Test equals with non-equal contacts
+		System.out.println("Testing non-equal contacts:");
+		TEST_Equals(p1, p2);  // Jan vs Stan - should be false
 		
-		//TODO: 2 cases:
-		//display hashcode case that demonstrates collision
-		//display hashcode case that demonstrates non- collision
-
-		TEST_hashcode(p1, p3);
-		TEST_hashcode(p2, p3);
-
-		//Create the phonebook handler
+		// Test equals with same contact
+		System.out.println("Testing equal contacts:");
+		TEST_Equals(p3, p3);  // Juan vs Juan - should be true
+		
+		// Test hashcode for non-collision
+		System.out.println("Testing non-collision hashcodes:");
+		TEST_hashcode(p1, p3);  // Jan vs Juan - different hashcodes
+		
+		// Test hashcode for collision
+		System.out.println("Testing collision hashcodes:");
+		TEST_hashcode(p2, p3);  // Stan vs Juan - same hashcode
+		
+		// Create the phonebook handler
 		phonebookHander = new PhonebookHandler(phonebook);
-
-		//TODO
-		//call 
+		
+		// Test sorting
 		List<Contact> sortedContacts = TEST_Sort(phonebookHander);
 		TEST_Display(sortedContacts);
 		
-		//TODO
-		// 2 cases:
-		// 1) a call to search finds the user and displays their entries 
-		//(2) a call to search does not find the user & displays some detail illustrating same
-		TEST_Search(phonebookHander, sortedContacts, "Juan");
-		 
-
+		// Test successful search
+		TEST_Search(phonebookHander, sortedContacts, "Juan");  // Should find entries
+		
+		// Test unsuccessful search
+		TEST_Search(phonebookHander, sortedContacts, "Bob");   // Should show not found
 	}
 
 	// 
 	public static List<Contact> TEST_Sort(PhonebookHandler phonebookHandler) {
-		//TODO: call your phonebookHander & have it sort the contacts.  Return those.
-		
-		List<Contact> sortedContacts = phonebookHander.sortByName();
+		System.out.println("\nSorting contacts...");
+		// Call phonebookHandler to sort the contacts
+		List<Contact> sortedContacts = phonebookHandler.sortByName();
 		return sortedContacts;
 	}
 
 	
 	public static void TEST_Search(PhonebookHandler phonebookHandler, List<Contact> sortedContacts, String name) {
-		//TODO: use the sorted contacts and a name to search for.  
-	  
-		
 		System.out.println("\n -- Search results for " + name + " -- ");
-		List<PhonebookEntry> selectedEntries = phonebookHander.binarySearch(sortedContacts, name);
-		for (PhonebookEntry entry : selectedEntries) {
-
-			System.out.println("Entries for " + name + " " + entry.getType() + " " + entry.getPhoneNumber());
+		List<PhonebookEntry> selectedEntries = phonebookHandler.binarySearch(sortedContacts, name);
+		
+		if (selectedEntries.isEmpty()) {
+			System.out.println("No entries found for contact: " + name);
+		} else {
+			for (PhonebookEntry entry : selectedEntries) {
+				System.out.println("Entries for " + name + " " + entry.getType() + " " + entry.getPhoneNumber());
+			}
 		}
 	}
 	
@@ -73,22 +73,22 @@ public class TestHarness {
 	}
 
 	public static void TEST_Equals(Contact r1, Contact r2) {
-
-		System.out.println("Checking r1.equals(r2) for: \n" + r1.toString() + "\n" + r2.toString());
+		System.out.println("Checking r1.equals(r2) for:");
+		System.out.println("Name: " + r1.getName() + ", Phone Number(s): " + r1.getPhonebookEntries());
+		System.out.println("Name: " + r2.getName() + ", Phone Number(s): " + r2.getPhonebookEntries());
 		System.out.println(r1.equals(r2));
-
 		System.out.println();
 	}
 
 	public static void TEST_hashcode(Contact r1, Contact r2) {
-
-		System.out.println("Checking r1.hashcode = r2.hashcode for: \n" + r1.toString() + "\n" + r2.toString());
+		System.out.println("Checking r1.hashcode = r2.hashcode for:");
+		System.out.println("Name: " + r1.getName() + ", Phone Number(s): " + r1.getPhonebookEntries());
+		System.out.println("Name: " + r2.getName() + ", Phone Number(s): " + r2.getPhonebookEntries());
+		
 		if (r1.hashCode() == r2.hashCode()) {
 			System.out.println("Hash matches - we're in the same bucket ( collision!): " + r1.hashCode());
-
 		} else {
 			System.out.println("NO hash match: " + r1.hashCode() + " / " + r2.hashCode());
-
 		}
 		System.out.println();
 	}
@@ -118,25 +118,25 @@ public class TestHarness {
 		System.out.println("Building Phonebook Entries ....");
 		TimeUnit.SECONDS.sleep(1);
 
-		p1.addPhonebookEntry("2034032233", "Home");
-		p1.addPhonebookEntry("5532233322", "Cell");
-		p1.addPhonebookEntry("1120092829", "Work");
+		p1.addPhonebookEntries("2034032233", "Home");
+		p1.addPhonebookEntries("5532233322", "Cell");
+		p1.addPhonebookEntries("1120092829", "Work");
 
-		p2.addPhonebookEntry("1034032233", "Home");
-		p2.addPhonebookEntry("2532233322", "Cell");
-		p2.addPhonebookEntry("3120092829", "Work");
+		p2.addPhonebookEntries("1034032233", "Home");
+		p2.addPhonebookEntries("2532233322", "Cell");
+		p2.addPhonebookEntries("3120092829", "Work");
 
-		p3.addPhonebookEntry("4034032233", "Home");
-		p3.addPhonebookEntry("5532233322", "Cell");
-		p3.addPhonebookEntry("6120092829", "Work");
+		p3.addPhonebookEntries("4034032233", "Home");
+		p3.addPhonebookEntries("5532233322", "Cell");
+		p3.addPhonebookEntries("6120092829", "Work");
 
-		p4.addPhonebookEntry("6034032233", "Home");
-		p4.addPhonebookEntry("3532233322", "Cell");
-		p4.addPhonebookEntry("1120092829", "Work");
+		p4.addPhonebookEntries("6034032233", "Home");
+		p4.addPhonebookEntries("3532233322", "Cell");
+		p4.addPhonebookEntries("1120092829", "Work");
 
-		p5.addPhonebookEntry("0034032233", "Home");
-		p5.addPhonebookEntry("0532233322", "Cell");
-		p5.addPhonebookEntry("0120092829", "Work");
+		p5.addPhonebookEntries("0034032233", "Home");
+		p5.addPhonebookEntries("0532233322", "Cell");
+		p5.addPhonebookEntries("0120092829", "Work");
 
 		System.out.println("Adding Entries to the phonebook ....\n");
 		TimeUnit.SECONDS.sleep(1);
